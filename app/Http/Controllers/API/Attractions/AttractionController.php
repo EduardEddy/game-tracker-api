@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\API\Attraction;
+namespace App\Http\Controllers\API\Attractions;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
@@ -8,12 +8,16 @@ use Illuminate\Http\Request;
 use Auth;
 use App\Models\Attraction;
 use App\Models\Park;
+//use Illuminate\Support\Facades\Auth;
 
 class AttractionController extends Controller
 {
     public function index()
     {
         try {
+            \Log::alert('Aqui');
+            \Log::alert(auth()->user());
+            \Log::alert(Auth::user());
             $park = Park::whereUserId(Auth::user()->id)->first();
             return response()->json([
                 'message'=>'success',
