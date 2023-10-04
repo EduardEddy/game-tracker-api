@@ -7,8 +7,8 @@ use App\Http\Controllers\API\Attractions\AttractionController;
 Route::middleware('auth:sanctum')->controller(AttractionController::class)
 ->prefix('/attractions')
 ->group(function() {
-    Route::get('/', 'index')->name('api.attractions');
-    Route::get('/{attraction}', 'show')->name('api.attractions');
+    Route::get('/', 'index');
+    Route::get('/{attraction}', 'show');
 });
 
 /*Route::get('attractions', [AttractionController::class, 'index'])
