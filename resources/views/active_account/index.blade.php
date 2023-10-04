@@ -9,15 +9,16 @@
                     <div class="card-body">
                         <form method="POST" action="{{ route('active-account') }}">
                             @csrf
+                            {{ $warning ?? '' }}
                             @if (session()->has('warning'))
                                 <div class="alert alert-warning">
                                     {{ session()->get('warning') }}
                                 </div>
                             @endif
                             <div class="alert alert-info text-center col-md-6 offset-md-3">
-                                Hemos enviado un codigo a tu correo para activar tu cuenta
+                                {{ $warning ?? 'Hemos enviado un codigo a tu correo para activar tu cuenta' }}
                             </div>
-                            <input type="hidden" name='user_id' value="{{ $user_id }}">
+                            <!--input type="hidden" name='user_id' value="{{-- $user_id --}}"-->
                             <div class="row mb-3">
                                 <label for="code"
                                     class="col-md-4 col-form-label text-md-end">{{ __('Codigo de validacion') }}</label>

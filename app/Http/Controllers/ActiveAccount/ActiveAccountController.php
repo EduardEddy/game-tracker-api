@@ -28,6 +28,7 @@ class ActiveAccountController extends Controller
             ]);
             return redirect('/login')->with("success", "Ya puedes iniciar sesion");
         }
-        return Redirect::back()->with(['warning' => 'El código es invalido']);
+        return view('active_account.index')->with(['warning' => 'El código es invalido']);
+        //return view('active_account.index', ['warning' => 'El código es invalido']);
     }
 }

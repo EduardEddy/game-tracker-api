@@ -8,11 +8,19 @@ use Illuminate\Http\Request;
 use App\Models\GuestAttraction;
 use App\Models\PriceAttraction;
 
+use App\Services\Guest\GuestAttractionService;
+
 class GuestAttractionController extends Controller
 {
+    private $guestAttractionService;
+    public function __construct() 
+    {
+        $this->guestAttractionService = new GuestAttractionService();
+    }
+
     public function index()
     {
-        $activities = GuestAttraction::with('guests','priceAttraction')->paginate(10);
+        $activities = $this->guestAttractionService->index();
         return view('activities.index', ['activities'=>$activities]);
     }
 

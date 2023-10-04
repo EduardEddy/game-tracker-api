@@ -14,7 +14,7 @@ class AttractionController extends Controller
     public function index()
     {
         try {
-            $park = Park::whereUserId(1/*Auth::user()->id*/)->first();
+            $park = Park::whereUserId(Auth::user()->id)->first();
             return response()->json([
                 'message'=>'success',
                 'data'=>Attraction::whereParkId($park->id)->get()
