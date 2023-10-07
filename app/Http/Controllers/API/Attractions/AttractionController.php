@@ -15,9 +15,6 @@ class AttractionController extends Controller
     public function index()
     {
         try {
-            \Log::alert('Aqui');
-            \Log::alert(auth()->user());
-            \Log::alert(Auth::user());
             $park = Park::whereUserId(Auth::user()->id)->first();
             return response()->json([
                 'message'=>'success',
