@@ -13,10 +13,10 @@ class GuestController extends Controller
     public function store(GuestRequest $request)
     {
         try {
-            Guest::create($request->validated());
+            $guest = Guest::create($request->validated());
             return response()->json([
     			'message'=>'success',
-    			'data'=>null
+    			'data'=>$guest
     		],200);
         } catch (\Throwable $th) {
             \Log::critical('ERROR Create Guest '.$th->getMessage().' Line: '.$th->getLine());
