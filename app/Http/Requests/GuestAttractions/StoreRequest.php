@@ -22,9 +22,8 @@ class StoreRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'guest_id' => 'required|exists:guests,id',
             'price_attraction_id' => 'required|exists:price_attractions,id',
-            'entry_time' => 'required',
+            'entry_time' => 'required|string'
         ];
     }
 
@@ -32,11 +31,10 @@ class StoreRequest extends FormRequest
     public function messages()
     {
         return [
-            'guest_id.required' => 'El niño es requerido',
-            'guest_id.exists' => 'El id es invalido',
             'price_attraction_id.required' => 'El campo  es requerido',
             'price_attraction_id.exists' => 'El id es invalido',
-            'entry_time.required' => 'El campo  es requerido',
+            'entry_time.required' => 'La hora es requerida',
+            'entry_time.string' => 'La hora es invalida',
         ];
     }
 }
