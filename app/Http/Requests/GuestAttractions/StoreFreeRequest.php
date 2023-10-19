@@ -4,7 +4,7 @@ namespace App\Http\Requests\GuestAttractions;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class StoreRequest extends FormRequest
+class StoreFreeRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -22,16 +22,14 @@ class StoreRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'price_attraction_id' => 'required|exists:price_attractions,id',
             'entry_time' => 'required|string'
         ];
     }
 
+
     public function messages()
     {
         return [
-            'price_attraction_id.required' => 'El campo  es requerido',
-            'price_attraction_id.exists' => 'El id es invalido',
             'entry_time.required' => 'La hora es requerida',
             'entry_time.string' => 'La hora es invalida',
         ];

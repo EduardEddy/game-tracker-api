@@ -17,6 +17,10 @@ class GuestService
             return $this->guestRepository->store($data);
         } catch (\Throwable $th) {
             \Log::critical('ERROR store Guest services: '.$th->getMessage().' Line: '.$th->getLine());
+            return response()->json([
+                'message'=>'Internal Error',
+                'data'=>null
+            ], 500);
         }
     }
 }

@@ -12,6 +12,7 @@ use App\Http\Requests\GuestAttractions\StoreRequest;
 use App\Models\PriceAttraction;
 use App\Services\Guest\GuestService;
 use App\Http\Requests\Guest\GuestRequest;
+use App\Http\Requests\GuestAttractions\NewGuestFreeRequest;
 
 use App\Traits\ParseTimeTrait;
 
@@ -62,7 +63,17 @@ class GuestAttractionController extends Controller
             'departure_time'=>$this->finishTime($request->entry_time, $priceAttraction->time)
         ]);
         return $resp;
-        
+    }
+
+    public function newAssign(Attraction $attraction, NewGuestFreeRequest $request) {
+        $priceAttraction = PriceAttraction::find($request->price_attraction_id);
+        $resp = $this->guestAttractionService->store([
+            'guest_id' => $request->guest_id,
+            'price_attraction_id' => $priceAttraction->id,
+            'entry_time'=> $this->entryTime($request->entry_time),
+            'departure_time'=>$this->finishTime($request->entry_time, $priceAttraction->time)
+        ]);
+        return $resp;
     }
 
     public function finishedTime( GuestAttraction $guestAttraction)
