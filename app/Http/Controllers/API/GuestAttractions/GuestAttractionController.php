@@ -33,7 +33,7 @@ class GuestAttractionController extends Controller
     {
         try {
 
-            $guests = Guest::SELECT('guests.*','entry_time', 'departure_time', 'is_active')
+            $guests = Guest::SELECT('guests.*','entry_time', 'departure_time', 'is_active', 'guest_attractions.id as guest_attraction_id')
             ->JOIN('guest_attractions','guests.id','=','guest_id')
             ->JOIN('price_attractions','price_attraction_id','=','price_attractions.id')
             ->WHERE('price_attractions.attraction_id','=',$attraction->id)
