@@ -29,14 +29,14 @@ class GuestAttractionController extends Controller
         $this->guestAttractionService = new GuestAttractionService();
     }
 
-    public function index(Attraction $attraction) 
+    public function index(Attraction $attraction, Request $request) 
     {
         try {
-
             $guests = Guest::SELECT('guests.*','entry_time', 'departure_time', 'is_active', 'guest_attractions.id as guest_attraction_id')
             ->JOIN('guest_attractions','guests.id','=','guest_id')
             ->JOIN('price_attractions','price_attraction_id','=','price_attractions.id')
             ->WHERE('price_attractions.attraction_id','=',$attraction->id)
+            ->WHERE('guest_attractions.is_active','=',$request->is_active)
             ->get();
             return response()->json([
     			'message'=>'success',
