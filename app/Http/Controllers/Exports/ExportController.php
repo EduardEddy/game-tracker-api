@@ -9,16 +9,23 @@ use App\Exports\TrackerExport;
 use App\Models\GuestAttraction;
 use Carbon\Carbon;
 use App\Helpers\CarbonDate\DateBase;
+use App\Services\Guest\GuestAttractionService;
 
 class ExportController extends Controller
 {
+    private $guestAttractionService;
+    public function __construct() 
+    {
+        $this->guestAttractionService = new GuestAttractionService();
+    }
+
     public function __invoke(Request $request)
     {
-        $activities = GuestAttraction::with('guests','priceAttraction')->get();
+        $activities = $this->guestAttractionService->index();
         $listToExport = $this->createArray($activities);
         $now = Carbon::now('-05:00');
         $day = $now->locale('es')->dayName.'_'.$now->toDateString();
-        return Excel::download(new TrackerExport($listToExport), "tracker_{$day}.xlsx");
+        return Excel::download(new TrackerExport($listToExport), "play_time_monitor_{$day}.xlsx");
     }
 
     private function createArray($activities)

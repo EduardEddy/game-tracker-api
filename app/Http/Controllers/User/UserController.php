@@ -21,7 +21,6 @@ class UserController extends Controller
         $this->parkService = new ParkService();
     }
     
-    use ParkTrait;
     public function store(RegisterRequest $request) 
     {
         $user = $this->userService->create($request->validated());

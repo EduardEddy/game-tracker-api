@@ -1,0 +1,12 @@
+version: '3.8'
+
+services:
+  laravel-app:
+    image: composer:latest
+    container_name: laravel-container
+    working_dir: /var/www/html
+    volumes:
+      - .:/var/www/html
+    ports:
+      - "8000:8000"
+    command: ["composer", "install"]

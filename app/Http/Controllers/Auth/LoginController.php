@@ -49,6 +49,10 @@ class LoginController extends Controller
             return redirect('/activities');
         }
 
+        if(!$this->accountDontExist($request->email) ) {
+            return Redirect::back()->withErrors(['msg' => 'No existe cuenta con el email ingresado']);
+        }
+
         if(!$this->isActiveUser($request->email) ) {
             return Redirect::back()->withErrors(['msg' => 'El usuario debe activar su cuenta']);
         }
@@ -59,7 +63,15 @@ class LoginController extends Controller
     private function isActiveUser($email) {
         $user = User::whereEmail($email)->first();
 
-        if ( $user->code_confirm != null ) {
+        if ($user->code_confirm != null ) {
+            return false;
+        }
+        return true;
+    }
+
+    private function accountDontExist(String $email) {
+        $user = User::whereEmail($email)->first();
+        if (!$user) {
             return false;
         }
         return true;

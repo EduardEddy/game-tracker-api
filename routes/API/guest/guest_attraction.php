@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\API\GuestAttractions\GuestAttractionController;
+use App\Http\Controllers\API\GuestAttractions\GuestAttractionsActiveController;
 
 Route::controller(GuestAttractionController::class)
     ->middleware(['auth:sanctum'])
@@ -13,3 +14,5 @@ Route::controller(GuestAttractionController::class)
         Route::get('/{attraction}', 'index');
     }
 );
+
+Route::middleware(['auth:sanctum'])->get('/guest-attractions/{attraction}/guest/{guest}',GuestAttractionsActiveController::class);

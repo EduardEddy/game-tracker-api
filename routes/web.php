@@ -46,5 +46,5 @@ Route::controller(UserController::class)->group(function() {
 
 Route::controller(ActiveAccountController::class)->group(function(){
     Route::get('/active-account', 'show');
-    Route::post('/active-account', 'store');
+    Route::post('/active-account', 'store')->name('active-account');
 });

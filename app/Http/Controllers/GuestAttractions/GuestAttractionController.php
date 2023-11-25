@@ -26,7 +26,7 @@ class GuestAttractionController extends Controller
 
     public function total() 
     {
-        $subtotal = GuestAttraction::all();
+        $subtotal = $this->guestAttractionService->index();
         $total = 0;
         foreach ($subtotal as $key => $stotal) {
             $total = $total + $stotal->priceAttraction->price;

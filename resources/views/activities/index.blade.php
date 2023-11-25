@@ -2,6 +2,10 @@
 
 @section('title_page', 'Actividades')
 
+@section('styles')
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css">
+@endsection
+
 @section('content')
     <div class="row">
 
@@ -16,10 +20,19 @@
                 <div class="card-body">
                     <!-- Page Heading -->
                     <div class="d-sm-flex align-items-center justify-content-between mb-4">
-                        <h1 class="h3 mb-0 text-gray-800"></h1>
+                        <h1 class="h3 mb-0 text-gray-800">
+                            <div class="form-group row">
+                                <label for="date" class="col-sm-4 col-form-label align-middle text-small">Fecha:</label>
+                                <div class="col-sm-8">
+                                    <input type="text" name="date" id="datepicker" class="form-control text-secundary">
+                                </div>
+                            </div>
+                        </h1>
                         <a href="/exports" target="_blank"
-                            class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i
-                                class="fas fa-download fa-sm text-white-50"></i> Generar Reporte</a>
+                            class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm">
+                            <i class="fas fa-download fa-sm text-white-50"></i> 
+                            Generar Reporte
+                        </a>
                     </div>
                     <div class="">
                         <table class="table table-border table-hover">
@@ -78,6 +91,8 @@
     </div>
 @endsection
 @section('script')
+    <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+    <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
     <script>
         $(document).ready(function() {
             const numberFormat = new Intl.NumberFormat("es-ES");
@@ -89,5 +104,7 @@
                 }
             });
         })
+
+        $(function() { $( "#datepicker" ).datepicker(); });
     </script>
 @endsection

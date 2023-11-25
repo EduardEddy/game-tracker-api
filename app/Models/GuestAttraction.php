@@ -8,10 +8,11 @@ use Illuminate\Database\Eloquent\Model;
 use App\Models\Guest;
 use App\Models\Attraction;
 use App\Models\PriceAttraction;
+use Illuminate\Database\Eloquent\Concerns\HasUuids;
 
 class GuestAttraction extends Model
 {
-    use HasFactory;
+    use HasFactory, HasUuids;
     protected $fillable = [
         'guest_id','price_attraction_id','entry_time','departure_time','is_active'
     ];
