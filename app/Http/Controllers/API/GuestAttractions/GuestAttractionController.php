@@ -31,25 +31,8 @@ class GuestAttractionController extends Controller
 
     public function index(Attraction $attraction, Request $request) 
     {
-        try {
-            $isActive = $request->is_active ?? true;
-            $guests = Guest::SELECT('guests.*','entry_time', 'departure_time', 'is_active', 'guest_attractions.id as guest_attraction_id')
-                ->JOIN('guest_attractions','guests.id','=','guest_id')
-                ->JOIN('price_attractions','price_attraction_id','=','price_attractions.id')
-                ->WHERE('price_attractions.attraction_id','=',$attraction->id)
-                ->WHERE('guest_attractions.is_active','=',$isActive)
-                ->get();
-            return response()->json([
-    			'message'=>'success',
-    			'data'=>$guests
-    		], 200);
-        } catch (\Throwable $th) {
-            \Log::critical('ERROR Index GuestAttraction '.$th->getMessage().' Line: '.$th->getLine());
-            return response()->json([
-    			'message'=>'internal error',
-    			'data'=>null
-    		], 500);
-        }
+        $isActive = $request->is_active ?? true;
+        return $this->guestAttractionService->listGuestToMobile($attraction->id, $isActive);        
     }
 
     public function store(StoreRequest $request, GuestRequest $guestRequest, Attraction $attraction)

@@ -60,4 +60,21 @@ class GuestAttractionService
     		], 500);
         }
     }
+    
+    public function listGuestToMobile($attractionId, $isActive) 
+    {
+        try {
+            return response()->json([
+    			'message'=>'success',
+    			'data'=>$this->guestAttractionRepository->listGuestOnAttractionToMobile($attractionId, $isActive)
+    		], 200);
+            
+        } catch (\Throwable $th) {
+            \Log::critical("Error on GuestAttractionService::listGuestToMobile ".$th->getMessage());
+            return response()->json([
+    			'message'=>'internal error',
+    			'data'=>null
+    		], 500);
+        }
+    }
 }
