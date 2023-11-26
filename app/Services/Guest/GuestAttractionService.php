@@ -6,13 +6,16 @@ use App\Models\GuestAttraction;
 use App\Repositories\Guest\GuestAttractionRepository;
 use Auth; 
 use Carbon\Carbon;
+use App\Helpers\HandleErrorResponse;
 
 class GuestAttractionService
 {
     protected $guestAttractionRepository;
+    protected $handleError;
     public function __construct()
     {
         $this->guestAttractionRepository = new GuestAttractionRepository();
+        $this->handleError = new HandleErrorResponse();
     }
 
     public function index()
@@ -26,7 +29,7 @@ class GuestAttractionService
             ->whereDate('guest_attractions.created_at', Carbon::today())
             ->paginate(10);
         } catch (\Throwable $th) {
-            \Log::critical("Error on UserService::create ".$th->getMessage());
+            return $this->handleError->handleError("on UserService::create ".$th->getMessage());
         }
     }
 
@@ -40,7 +43,7 @@ class GuestAttractionService
             }
             return response()->json($total, 200);
         } catch (\Throwable $th) {
-            Log::critical("Error on UserService::create ".$th->getMessage());
+            return $this->handleError->handleError("on UserService::create ".$th->getMessage());
         }
     }
 
@@ -53,11 +56,7 @@ class GuestAttractionService
     			'data'=>null
     		], 201);
         } catch (\Throwable $th) {
-            \Log::critical("Error on GuestAttractionService::store ".$th->getMessage());
-            return response()->json([
-    			'message'=>'internal error',
-    			'data'=>null
-    		], 500);
+            return $this->handleError->handleError("on GuestAttractionService::store ".$th->getMessage());
         }
     }
     
@@ -68,13 +67,8 @@ class GuestAttractionService
     			'message'=>'success',
     			'data'=>$this->guestAttractionRepository->listGuestOnAttractionToMobile($attractionId, $isActive)
     		], 200);
-            
         } catch (\Throwable $th) {
-            \Log::critical("Error on GuestAttractionService::listGuestToMobile ".$th->getMessage());
-            return response()->json([
-    			'message'=>'internal error',
-    			'data'=>null
-    		], 500);
+            return $this->handleError->handleError("on GuestAttractionService::listGuestToMobile ".$th->getMessage());
         }
     }
 }

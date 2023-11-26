@@ -8,5 +8,6 @@ Route::controller(GuestController::class)
     ->group(function() {
         Route::post('/', 'store')->name('guest.create');
         Route::get('/','checkrates');
+        Route::get('/{guest}', 'show');
     }
 );

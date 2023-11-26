@@ -7,9 +7,16 @@ use Illuminate\Http\Request;
 
 use App\Models\Guest;
 use App\Http\Requests\Guest\GuestRequest;
+use App\Helpers\HandleErrorResponse;
 
 class GuestController extends Controller
 {
+    protected $handleError;
+    function __construct()
+    {
+        $this->handleError = new HandleErrorResponse();
+    }
+
     public function store(GuestRequest $request)
     {
         try {
@@ -19,11 +26,7 @@ class GuestController extends Controller
     			'data'=>$guest
     		],200);
         } catch (\Throwable $th) {
-            \Log::critical('ERROR Create Guest '.$th->getMessage().' Line: '.$th->getLine());
-            return response()->json([
-    			'message'=>'internal error',
-    			'data'=>null
-    		],500);
+            return $this->handleError->handleError('Create Guest '.$th->getMessage().' Line: '.$th->getLine());
         }
         
     }
@@ -71,5 +74,17 @@ class GuestController extends Controller
         curl_close($curl);
 
         return $data;
+    }
+
+    public function show(Guest $guest) 
+    {
+        try {
+            return response()->json([
+                'message'=>'success',
+                'data'=>$guest 
+            ], 200);
+        } catch (\Throwable $th) {
+            return $this->handleError->handleError("error GuestController::show {$th->getMessage()} Line: {$th->getLine()}");
+        }
     }
 }
