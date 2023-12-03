@@ -24,6 +24,7 @@ class NewGuestFreeRequest extends FormRequest
         return [
             'entry_time' => 'required|string',
             'guest_id' => 'required|exists:guests,id',
+            'price_attraction_id' => 'required|exists:price_attractions,id',
         ];
     }
 
@@ -34,6 +35,8 @@ class NewGuestFreeRequest extends FormRequest
             'guest_id.exists' => 'El id es invalido',
             'entry_time.required' => 'La hora es requerida',
             'entry_time.string' => 'La hora es invalida',
+            'price_attraction_id.required' => 'La hora es requerida',
+            'price_attraction_id.exists' => 'La hora es invalida',
         ];
     }
 }

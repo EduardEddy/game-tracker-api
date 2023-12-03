@@ -47,7 +47,7 @@ class GuestFreeAttractionController extends Controller
             'guest_id' => $request->guest_id,
             'price_attraction_id' => $priceAttraction->id,
             'entry_time'=> $this->entryTime($request->entry_time),
-            'departure_time'=>0
+            'departure_time'=> 0
         ]);
         return $resp;
     }
