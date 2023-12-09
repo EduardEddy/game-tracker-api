@@ -63,12 +63,24 @@ class GuestAttractionService
     public function listGuestToMobile($attractionId, $isActive) 
     {
         try {
+            $listGuest = $this->guestAttractionRepository->listGuestOnAttractionToMobile($attractionId, $isActive);
+            $newList = [];
+            foreach ($listGuest as $key => $guest) {
+                if ($guest->is_active == $isActive) {
+                    array_push($newList, $guest);
+                }
+            }
+
             return response()->json([
     			'message'=>'success',
-    			'data'=>$this->guestAttractionRepository->listGuestOnAttractionToMobile($attractionId, $isActive)
+    			'data'=>$newList
     		], 200);
         } catch (\Throwable $th) {
             return $this->handleError->handleError("on GuestAttractionService::listGuestToMobile ".$th->getMessage());
         }
+    }
+
+    function filtroIsActive($elemento) {
+        return $elemento['is_active'] == 1;
     }
 }

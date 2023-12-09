@@ -18,7 +18,6 @@ return new class extends Migration
             $table->time('entry_time');
             $table->time('departure_time');
             $table->boolean('is_active')->default(true);
-            //$table->integer('minutes')->description('tiempo en minutos que pasan los niños en la atracción');
             $table->timestamps();
         });
     }
