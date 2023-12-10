@@ -32,7 +32,7 @@ class GuestAttractionRepository
         ->JOIN('price_attractions','price_attraction_id','=','price_attractions.id')
         ->WHERE('price_attractions.attraction_id','=',$attractionId)
         //->WHERE('guest_attractions.is_active','=',$isActive)
-        ->whereDate('guest_attractions.created_at', Carbon::today())
+        ->whereDate('guest_attractions.created_at', Carbon::today()->setTimezone('America/Bogota'))
         ->join(DB::raw('(SELECT guest_id, MAX(guest_attractions.created_at) AS max_created_at
             FROM guest_attractions
             GROUP BY guest_id) latest_entries'),
