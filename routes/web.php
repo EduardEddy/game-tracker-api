@@ -48,3 +48,7 @@ Route::controller(ActiveAccountController::class)->group(function(){
     Route::get('/active-account', 'show');
     Route::post('/active-account', 'store')->name('active-account');
 });
+
+Route::get('/term-condition', function(){
+    return view('TC.term_condition');
+});
