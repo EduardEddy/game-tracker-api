@@ -87,6 +87,9 @@ return [
         'mailtrap' => [
             'transport' => 'mailtrap'
         ],
+        'resend' => [
+            'transport' => 'resend',
+        ],        
     ],
 
     /*

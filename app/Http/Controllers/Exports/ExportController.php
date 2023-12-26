@@ -21,19 +21,19 @@ class ExportController extends Controller
 
     public function __invoke(Request $request)
     {
-        $activities = $this->guestAttractionService->index();
+        $date = $request->date ? Carbon::parse($request->date) : Carbon::now();
+        $activities = $this->guestAttractionService->index($date);
         $listToExport = $this->createArray($activities);
-        $now = Carbon::now('-05:00');
-        $day = $now->locale('es')->dayName.'_'.$now->toDateString();
+        $day = $date->locale('es')->dayName.'_'.$date->toDateString();
         return Excel::download(new TrackerExport($listToExport), "play_time_monitor_{$day}.xlsx");
     }
 
     private function createArray($activities)
     {
-
+        \Log::alert($activities);
         $listToExport = [];
         array_push(
-            $listToExport, ['Niño','Hora entrada','Hora salida','Minutos','Monto']
+            $listToExport, ['Niño','Hora entrada','Hora salida','Minutos','Fecha','Monto']
         );
         $total = 0;
         foreach ($activities as $key => $activity) {
@@ -49,13 +49,16 @@ class ExportController extends Controller
                 $activity->entry_time,
                 $departureTime,
                 $time,
+                Carbon::parse($activity->date_create)->toDateString(),
                 $activity->priceAttraction->price,
             ]);
             $total = $total + $activity->priceAttraction->price;
         }
-
         array_push($listToExport,[
-            '','','','TOTAL:',$total,
+            '','','','','','',
+        ]);
+        array_push($listToExport,[
+            '','','','','TOTAL:',$total,
         ]);
         return $listToExport;
     }

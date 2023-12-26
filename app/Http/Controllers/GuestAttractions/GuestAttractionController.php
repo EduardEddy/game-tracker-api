@@ -10,6 +10,8 @@ use App\Models\PriceAttraction;
 
 use App\Services\Guest\GuestAttractionService;
 
+use Carbon\Carbon;
+
 class GuestAttractionController extends Controller
 {
     private $guestAttractionService;
@@ -18,15 +20,17 @@ class GuestAttractionController extends Controller
         $this->guestAttractionService = new GuestAttractionService();
     }
 
-    public function index()
+    public function index(Request $request)
     {
-        $activities = $this->guestAttractionService->index();
-        return view('activities.index', ['activities'=>$activities]);
+        $date = $request->date ? Carbon::parse($request->date) : Carbon::now();
+        $activities = $this->guestAttractionService->index($date);
+        return view('activities.index', ['activities'=>$activities, 'date'=>$date->format('m/d/Y')]);
     }
 
-    public function total() 
+    public function total(Request $request) 
     {
-        $subtotal = $this->guestAttractionService->index();
+        $date = $request->date ? Carbon::parse($request->date) : Carbon::now();
+        $subtotal = $this->guestAttractionService->index($date);
         $total = 0;
         foreach ($subtotal as $key => $stotal) {
             $total = $total + $stotal->priceAttraction->price;

@@ -19,20 +19,35 @@
                 <!-- Card Body -->
                 <div class="card-body">
                     <!-- Page Heading -->
-                    <div class="d-sm-flex align-items-center justify-content-between mb-4">
-                        <h1 class="h3 mb-0 text-gray-800">
+                    <div class="align-items-center justify-content-between mb-4">
+                        <!--h1 class="h3 mb-0 text-gray-800"-->
+                        <form action="">
                             <div class="form-group row">
-                                <label for="date" class="col-sm-4 col-form-label align-middle text-small">Fecha:</label>
-                                <div class="col-sm-8">
-                                    <input type="text" name="date" id="datepicker" class="form-control text-secundary">
+                                <div class="col-sm-3 pt-2">
+                                    <label for="date" class="col-sm-4 col-form-label align-middle text-small">Fecha:</label>
+                                </div>
+
+                                <div class="row col-sm-4 pt-2">
+                                    <input type="text" name="date" id="datepicker" class="form-control text-secundary" value="{{$date}}">
+                                </div>
+                                
+                            </div>
+                            <!--/h1-->
+                            <div class="form-group row">
+                                <div class="col-sm-3 pt-2">
+                                    <a href="/exports?date={{$date}}" target="_blank"
+                                    class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm">
+                                        <i class="fas fa-download fa-sm text-white-50"></i> 
+                                        Generar Reporte
+                                    </a>
+                                </div>
+                                <div class="col-sm-3 pt-2">
+                                    <button class=" btn btn-sm btn-info btn-block">Actualizar</button>
                                 </div>
                             </div>
-                        </h1>
-                        <a href="/exports" target="_blank"
-                            class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm">
-                            <i class="fas fa-download fa-sm text-white-50"></i> 
-                            Generar Reporte
-                        </a>
+
+                        </form>
+                        
                     </div>
                     <div class="">
                         <table class="table table-border table-hover">
@@ -96,8 +111,9 @@
     <script>
         $(document).ready(function() {
             const numberFormat = new Intl.NumberFormat("es-ES");
+            const date = $( "#datepicker" ).val();
             $.ajax({
-                url: "/activities/total",
+                url: `/activities/total?date=${date}`,
                 type: 'GET',
                 success: function(res) {
                     $("#total").html(numberFormat.format(res));
