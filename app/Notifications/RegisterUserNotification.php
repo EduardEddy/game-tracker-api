@@ -7,7 +7,7 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Notification;
 use App\Mail\RegisterUserMail;
-use Resend\Laravel\Facades\Resend;
+//use Resend\Laravel\Facades\Resend;
 use Illuminate\Support\Facades\Mail;
 
 class RegisterUserNotification extends Notification
@@ -37,15 +37,15 @@ class RegisterUserNotification extends Notification
      */
     public function toMail(object $notifiable)
     {
-        Resend::emails()->send([
+        /*Resend::emails()->send([
             'from' => 'Play Time Monitor <hello@playtimemonitor.com>',
             'to' => "doble_e87@hotmail.com",
             //'to' => [$notifiable->email],
             'subject' => 'hello',
             'html' => $this->email(),
-        ]);
+        ]);*/
         //Mail::to('eduardeddyacevedo@gmail.com')->send(new RegisterUserMail($notifiable));
-        //return (new RegisterUserMail($notifiable))->to($notifiable);
+        return (new RegisterUserMail($notifiable))->to($notifiable);
         /*return (new MailMessage)
                     ->line('The introduction to the notification.')
                     ->action('Notification Action', url('/'))
