@@ -52,3 +52,7 @@ Route::controller(ActiveAccountController::class)->group(function(){
 Route::get('/term-condition', function(){
     return view('TC.term_condition');
 });
+
+Route::get('/qr-app', function() {
+    return view('qr.index');
+});

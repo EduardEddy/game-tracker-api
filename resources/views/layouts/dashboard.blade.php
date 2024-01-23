@@ -10,7 +10,7 @@
     <meta name="author" content="">
 
     <title>@yield('title', 'Admin')</title>
-
+    <link rel="icon" type="{{ asset('assets/logos/play_time_logo.png') }}">
     <!-- Custom fonts for this template-->
     <link href="{{ URL::asset('assets/template/vendor/fontawesome-free/css/all.min.css') }}" rel="stylesheet"
         type="text/css">
