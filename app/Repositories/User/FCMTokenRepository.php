@@ -10,7 +10,6 @@ class FCMTokenRepository
 {
     public function create($token, User $user, Park $park)
     {
-        \Log::info($oken, $user, $park);
         FCMToken::create([
             'token' => $token, 
             'is_login' => true, 
