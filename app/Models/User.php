@@ -7,12 +7,14 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 use App\Models\Park;
+use App\Models\MFCToken;
 
 class User extends Authenticatable
 {
-    use HasApiTokens, HasFactory, Notifiable;
+    use HasApiTokens, HasFactory, Notifiable, SoftDeletes;
 
     /**
      * The attributes that are mass assignable.
@@ -20,13 +22,9 @@ class User extends Authenticatable
      * @var array<int, string>
      */
     protected $fillable = [
-        'name',
-        'last_name',
-        'email',
-        'password',
-        'phone',
-        'code_confirm',
-        'email_verified_at'
+        'name', 'last_name', 'email',
+        'password', 'phone',
+        'code_confirm', 'email_verified_at', 'is_admin'
     ];
 
     /**
@@ -51,5 +49,15 @@ class User extends Authenticatable
     public function Parks()
     {
         return $this->hasMany(Park::class, 'user_id');
+    }
+
+    public function mfcToken()
+    {
+        return $this->hasMany(MFCToken::class, 'user_id');
+    }
+
+    public function colaboratorPark()
+    {
+        return $this->belongsToMany(Park::class, 'colaborator_parks')->withPivot();
     }
 }

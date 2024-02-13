@@ -110,6 +110,12 @@
             <span>Juegos</span></a>
     </li>
 
+    <li class="nav-item">
+        <a class="nav-link" href="/collaborators">
+            <i class="fas fa-fw fa-user"></i>
+            <span>Colaboradores</span></a>
+    </li>
+
     <!-- Divider -->
     <hr class="sidebar-divider d-none d-md-block">
 

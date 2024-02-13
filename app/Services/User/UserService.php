@@ -12,7 +12,7 @@ class UserService
         try {
             return User::create($data);
         } catch (\Throwable $th) {
-            Log::critical("Error on UserService::create ".$th->getMessage());
+            \Log::critical("Error on UserService::create ".$th->getMessage());
         }
     }
 }
