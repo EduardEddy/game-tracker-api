@@ -58,6 +58,6 @@ Route::get('/qr-app', function() {
     return view('qr.index');
 });
 
-Route::controller(CurrentTimeController::class)->group(function() {
-    Route::get('/current-time', 'index');
+Route::get('/current-time', function() {
+    return date('H:i:s');
 });
