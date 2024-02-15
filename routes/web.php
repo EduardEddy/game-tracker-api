@@ -3,7 +3,6 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\User\UserController;
 use App\Http\Controllers\ActiveAccount\ActiveAccountController;
-use App\Http\Controllers\CurrentTimeController;
 
 /*
 |--------------------------------------------------------------------------
@@ -56,8 +55,4 @@ Route::get('/term-condition', function(){
 
 Route::get('/qr-app', function() {
     return view('qr.index');
-});
-
-Route::get('/current-time', function() {
-    return date('H:i:s');
 });
