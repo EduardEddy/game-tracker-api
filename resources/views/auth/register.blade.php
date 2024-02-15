@@ -121,10 +121,14 @@
                                 </div>
                             </div>
 
+                            <div class="row mb-3">
+                                <p class="text-center">Al precionar registrarse aceptas los <a href="{{ url('/term-condition') }}" target="_blank">terminos y condiciones</a></p>
+                            </div>
+
                             <div class="row mb-0">
                                 <div class="col-md-6 offset-md-4">
                                     <button type="submit" class="btn btn-primary">
-                                        {{ __('Register') }}
+                                        {{ __('Registrarse') }}
                                     </button>
                                 </div>
                             </div>
