@@ -7,15 +7,18 @@ use App\Repositories\Guest\GuestAttractionRepository;
 use Auth; 
 use Carbon\Carbon;
 use App\Helpers\HandleErrorResponse;
+use App\Helpers\HandleDifferencesTime;
 
 class GuestAttractionService
 {
     protected $guestAttractionRepository;
     protected $handleError;
+    protected $handleDifferencesTime;
     public function __construct()
     {
         $this->guestAttractionRepository = new GuestAttractionRepository();
         $this->handleError = new HandleErrorResponse();
+        $this->handleDifferencesTime = new HandleDifferencesTime();
     }
 
     public function index($date)
@@ -67,6 +70,10 @@ class GuestAttractionService
             $newList = [];
             foreach ($listGuest as $key => $guest) {
                 if ($guest->is_active == $isActive) {
+                    if($isActive){
+                       $difference = $this->handleDifferencesTime->calculateDifferencesTime($guest->departure_time);
+                       $guest['difference'] = $difference;
+                    }
                     array_push($newList, $guest);
                 }
             }
@@ -76,7 +83,7 @@ class GuestAttractionService
     			'data'=>$newList
     		], 200);
         } catch (\Throwable $th) {
-            return $this->handleError->handleError("on GuestAttractionService::listGuestToMobile ".$th->getMessage());
+            return $this->handleError->handleError("on GuestAttractionService::listGuestToMobile ".$th->getMessage()." Line: ".$th->getLine());
         }
     }
 
