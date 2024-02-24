@@ -2,13 +2,10 @@
 
 namespace App\Helpers;
 
-final class HandleDifferencesTime
+class HandleDifferencesTime
 {
-    public function calculateDifferencesTime($departureTime)
+    public static function calculateDifferencesTime($departureTime, $currentTime)
     {
-        // Obtén la hora actual del servidor
-        $currentTime = date('H:i:s');
-    
         // Calcula la diferencia entre ambas horas
         $difference = strtotime($departureTime) - strtotime($currentTime);
         //$difference = strtotime($currentTime) - strtotime($departureTime);

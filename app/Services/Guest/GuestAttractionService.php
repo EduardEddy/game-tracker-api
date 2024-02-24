@@ -13,12 +13,10 @@ class GuestAttractionService
 {
     protected $guestAttractionRepository;
     protected $handleError;
-    protected $handleDifferencesTime;
     public function __construct()
     {
         $this->guestAttractionRepository = new GuestAttractionRepository();
         $this->handleError = new HandleErrorResponse();
-        $this->handleDifferencesTime = new HandleDifferencesTime();
     }
 
     public function index($date)
@@ -71,8 +69,11 @@ class GuestAttractionService
             foreach ($listGuest as $key => $guest) {
                 if ($guest->is_active == $isActive) {
                     if($isActive){
-                       $difference = $this->handleDifferencesTime->calculateDifferencesTime($guest->departure_time);
-                       $guest['difference'] = $difference;
+
+                        // Obtén la hora actual del servidor
+                        $currentTime = date('H:i:s');
+                        $difference = HandleDifferencesTime::calculateDifferencesTime($guest->departure_time, $currentTime);
+                        $guest['difference'] = $difference;
                     }
                     array_push($newList, $guest);
                 }

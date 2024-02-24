@@ -122,6 +122,21 @@
                             </div>
 
                             <div class="row mb-3">
+                                <label for=""
+                                    class="col-md-4 col-form-label text-md-end"></label>
+                                <div class="col-md-6 row">
+                                    <label for="plan">
+                                        <div class="rounded border border-primary col-md-4" style="border-color: #ced4da !important">
+                                            <center>
+                                                <div for="btn-check">Plan Básico</div>
+                                                <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1" checked="checked" name="basic">
+                                            </center>
+                                        </div>
+                                    </label>
+                                </div>
+                            </div>
+
+                            <div class="row mb-3">
                                 <p class="text-center">Al precionar registrarse aceptas los <a href="{{ url('/term-condition') }}" target="_blank">terminos y condiciones</a></p>
                             </div>
 
