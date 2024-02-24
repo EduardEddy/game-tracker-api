@@ -69,10 +69,10 @@ class GuestAttractionService
             foreach ($listGuest as $key => $guest) {
                 if ($guest->is_active == $isActive) {
                     if($isActive){
-
+                        $handleDifferencesTime = new HandleDifferencesTime(); 
                         // Obtén la hora actual del servidor
                         $currentTime = date('H:i:s');
-                        $difference = HandleDifferencesTime::calculateDifferencesTime($guest->departure_time, $currentTime);
+                        $difference = $handleDifferencesTime->calculateDifferencesTime($guest->departure_time, $currentTime);
                         $guest['difference'] = $difference;
                     }
                     array_push($newList, $guest);

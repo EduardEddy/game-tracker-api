@@ -4,7 +4,7 @@ namespace App\Helpers;
 
 class HandleDifferencesTime
 {
-    public static function calculateDifferencesTime($departureTime, $currentTime)
+    public function calculateDifferencesTime($departureTime, $currentTime)
     {
         // Calcula la diferencia entre ambas horas
         $difference = strtotime($departureTime) - strtotime($currentTime);
