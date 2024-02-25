@@ -23,7 +23,7 @@ class AttractionService
             if ($user->isAdmin) {
                 $data = $this->attractionRepository->attractionByAdminUser($user);
             } else {
-                $data = $this->attractionRepository->attractionByAdminUser($user);
+                $data = $this->attractionRepository->attractionByCollaboratorUser($user);
             }
             return response()->json([
                 'message'=>'success',
