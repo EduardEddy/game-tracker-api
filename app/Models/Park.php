@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 use App\Models\User;
+use App\Models\Attraction;
 
 class Park extends Model
 {
@@ -22,5 +23,10 @@ class Park extends Model
     public function colaborator()
     {
         return $this->belongsToMany(User::class,'colaborator_parks')->withPivot();
+    }
+
+    public function attractions()
+    {
+        return $this->hasMany(Attraction::class, 'park_id');
     }
 }

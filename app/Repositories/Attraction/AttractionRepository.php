@@ -10,12 +10,14 @@ class AttractionRepository
 {
     public function attractionByAdminUser(User $user) 
     {
-        return Park::whereUserId($user->id)->first();
+        $park = Park::whereUserId($user->id)->first();
+        return $park->attractions;
     }
 
     public function attractionByCollaboratorUser(User $user)
     {
         $collaboratorPark = CollaboratorPark::whereUserId($user->id)->first();
-        return Park::where('id',$collaboratorPark->park_id)->first();
+        $park = Park::where('id',$collaboratorPark->park_id)->first();
+        return $park->attractions;
     }
 }

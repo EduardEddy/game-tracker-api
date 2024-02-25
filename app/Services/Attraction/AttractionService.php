@@ -19,7 +19,6 @@ class AttractionService
     public function index(User $user)
     {
         try {
-            \Log::info($user);
             if ($user->is_admin) {
                 $data = $this->attractionRepository->attractionByAdminUser($user);
             } else {
