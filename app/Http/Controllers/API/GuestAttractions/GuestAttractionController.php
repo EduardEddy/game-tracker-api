@@ -40,22 +40,30 @@ class GuestAttractionController extends Controller
         $guest = $this->guestService->store($guestRequest->validated());
         $priceAttraction = PriceAttraction::find($request->price_attraction_id);
         
+        $currentTime = date('H:i:s');
         $resp = $this->guestAttractionService->store([
             'guest_id' => $guest->id,
             'price_attraction_id' => $priceAttraction->id,
-            'entry_time'=> $this->entryTime($request->entry_time),
-            'departure_time'=>$this->finishTime($request->entry_time, $priceAttraction->time)
+            'entry_time'=> $this->entryTime($currentTime),
+            'departure_time'=>$this->finishTime($currentTime, $priceAttraction->time)
+
+            //'entry_time'=> $this->entryTime($request->entry_time),
+            //'departure_time'=>$this->finishTime($request->entry_time, $priceAttraction->time)
         ]);
         return $resp;
     }
 
     public function newAssign(Attraction $attraction, NewGuestFreeRequest $request) {
         $priceAttraction = PriceAttraction::find($request->price_attraction_id);
+        $currentTime = date('H:i:s');
         $resp = $this->guestAttractionService->store([
             'guest_id' => $request->guest_id,
             'price_attraction_id' => $priceAttraction->id,
-            'entry_time'=> $this->entryTime($request->entry_time),
-            'departure_time'=>$this->finishTime($request->entry_time, $priceAttraction->time)
+            'entry_time'=> $this->entryTime($currentTime),
+            'departure_time'=>$this->finishTime($currentTime, $priceAttraction->time)
+
+            //'entry_time'=> $this->entryTime($request->entry_time),
+            //'departure_time'=>$this->finishTime($request->entry_time, $priceAttraction->time)
         ]);
         return $resp;
     }
