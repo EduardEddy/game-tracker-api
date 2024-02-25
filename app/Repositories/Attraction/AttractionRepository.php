@@ -15,7 +15,7 @@ class AttractionRepository
 
     public function attractionByCollaboratorUser(User $user)
     {
-        $collaboratorPark = CollaboratorPark::whereUserId(Auth::user()->id)->first();
-        return Park::whereParkId($collaboratorPark->id);
+        $collaboratorPark = CollaboratorPark::whereUserId($user->id)->first();
+        return Park::where('id',$collaboratorPark->park_id)->first();
     }
 }

@@ -14,13 +14,13 @@ class AttractionService
     public function __construct() {
         $this->attractionRepository = new AttractionRepository();
         $this->handleError = new HandleErrorResponse();
-
     }
 
     public function index(User $user)
     {
         try {
-            if ($user->isAdmin) {
+            \Log::info($user);
+            if ($user->is_admin) {
                 $data = $this->attractionRepository->attractionByAdminUser($user);
             } else {
                 $data = $this->attractionRepository->attractionByCollaboratorUser($user);
