@@ -21,7 +21,7 @@ class CheckGuestActiveOnAttractionService
         try {
             return response()->json([
                 'message'=>'success',
-                'data'=>$this->guestAttractionRepository->attractionByCollaboratorUser($attractionId, $guestId)
+                'data'=>$this->guestAttractionRepository->ckeckStatusGuest($attractionId, $guestId)
             ]);
         } catch (\Throwable $th) {
             return $this->handleError->handleError("on CheckGuestActiveOnAttractionService::ckeckStatusGuest ".$th->getMessage());
