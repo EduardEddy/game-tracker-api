@@ -34,20 +34,6 @@ class GuestAttractionService
         }
     }
 
-    public function total()
-    {
-        try {
-            $subtotal = GuestAttraction::all();
-            $total = 0;
-            foreach ($subtotal as $key => $stotal) {
-                $total = $total + $stotal->priceAttraction->price;
-            }
-            return response()->json($total, 200);
-        } catch (\Throwable $th) {
-            return $this->handleError->handleError("on UserService::create ".$th->getMessage());
-        }
-    }
-
     public function store($data)
     {
         try {
@@ -90,5 +76,23 @@ class GuestAttractionService
 
     function filtroIsActive($elemento) {
         return $elemento['is_active'] == 1;
+    }
+
+    public function total($date) {
+        try {
+            $total = $this->guestAttractionRepository->total($date, Auth::user()->id);
+            return response()->json($total->total, 200);
+        } catch (\Throwable $th) {
+            return $this->handleError->handleError("on GuestAttractionService::total ".$th->getMessage()." Line: ".$th->getLine());
+        }
+    }
+
+    public function toDownload($date)
+    {
+        try {
+            return $this->guestAttractionRepository->toDownload($date, Auth::user()->id);
+        } catch (\Throwable $th) {
+            return $this->handleError->handleError("on GuestAttractionService::toDownload ".$th->getMessage()." Line: ".$th->getLine());
+        }
     }
 }

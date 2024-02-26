@@ -10,10 +10,12 @@ use Illuminate\Support\Facades\Event;
 // Observers
 use App\Observers\User\UserObserver;
 use App\Observers\Attractions\AttractionObserver;
+use App\Observers\Park\ParkObserver;
 
 // Models
 use App\Models\User;
 use App\Models\Attraction;
+use App\Models\Park;
 
 class EventServiceProvider extends ServiceProvider
 {
@@ -35,6 +37,7 @@ class EventServiceProvider extends ServiceProvider
     {
         User::observe(UserObserver::class);
         Attraction::observe(AttractionObserver::class);
+        Park::observe(ParkObserver::class);
     }
 
     /**

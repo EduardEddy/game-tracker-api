@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::table('parks', function (Blueprint $table) {
             $table->string('plan')->nullable();
-            $table->date('udpate_plan_at')->nullable();
+            $table->date('update_plan_at')->nullable();
             $table->date('next_payment_date')->nullable();
         });
     }
@@ -25,7 +25,7 @@ return new class extends Migration
     {
         Schema::table('parks', function (Blueprint $table) {
             $table->dropColumn('plan');
-            $table->dropColumn('udpate_plan_at');
+            $table->dropColumn('update_plan_at');
             $table->dropColumn('next_payment_date');
         });
     }

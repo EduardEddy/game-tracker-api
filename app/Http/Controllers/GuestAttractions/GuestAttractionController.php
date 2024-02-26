@@ -30,11 +30,7 @@ class GuestAttractionController extends Controller
     public function total(Request $request) 
     {
         $date = $request->date ? Carbon::parse($request->date) : Carbon::now();
-        $subtotal = $this->guestAttractionService->index($date);
-        $total = 0;
-        foreach ($subtotal as $key => $stotal) {
-            $total = $total + $stotal->priceAttraction->price;
-        }
-        return response()->json($total, 200);
+
+        return $this->guestAttractionService->total($date);
     }
 }

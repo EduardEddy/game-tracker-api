@@ -42,4 +42,26 @@ class GuestAttractionRepository
             })
         ->get();
     }
+
+    public function total($date, $authUserId)
+    {
+        return GuestAttraction::selectRaw('SUM(price_attractions.price) as total')
+        ->join('price_attractions', 'price_attractions.id', '=', 'guest_attractions.price_attraction_id')
+        ->join('attractions', 'price_attractions.attraction_id', '=', 'attractions.id')
+        ->join('parks', 'parks.id', '=', 'attractions.park_id')
+        ->where('parks.user_id', $authUserId)
+        ->whereDate('guest_attractions.created_at', $date)
+        ->first();
+    }
+
+    public function toDownload($date, $authUserId) 
+    {
+        return GuestAttraction::select('*','guest_attractions.created_at as date_create')->with('guests','priceAttraction')
+            ->join('price_attractions','price_attractions.id','=','guest_attractions.price_attraction_id')
+            ->join('attractions','price_attractions.attraction_id','attractions.id')
+            ->join('parks','parks.id', '=', 'attractions.park_id')
+            ->where('parks.user_id', $authUserId)
+            ->whereDate('guest_attractions.created_at', $date)
+            ->get();
+    }
 }

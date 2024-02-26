@@ -12,7 +12,7 @@ class Park extends Model
 {
     use HasFactory;
     protected $fillable = [
-        'park_name','user_id'
+        'park_name','user_id','update_plan_at','next_payment_date','plan'
     ];
 
     public function admin()

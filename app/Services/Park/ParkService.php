@@ -15,7 +15,7 @@ class ParkService
                 'user_id' => $user->id
             ]);
         } catch (\Throwable $th) {
-            Log::critical("Error on ParkService::create ".$th->getMessage());
+            \Log::critical("Error on ParkService::create ".$th->getMessage());
         }
     }
 }
