@@ -92,7 +92,7 @@
                             </tbody>
                         </table>
                     </div>
-                    {{ $activities->links('pagination::bootstrap-4') }}
+                    {{ $activities->appends(['date' => $date])->links('pagination::bootstrap-4') }}
                 </div>
                 <div class="card-footer">
                     <h4 class="m-0 font-weight-bold text-primary float-right">
