@@ -36,10 +36,6 @@ Route::get('/dashboard', function() {
 })->middleware('auth');
 
 
-Route::get('/test', function() {
-    return view('active_account.index');
-});
-
 Route::controller(UserController::class)->group(function() {
     Route::post('/users', 'store')->name('users');
 });
